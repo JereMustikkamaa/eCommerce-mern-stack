@@ -25,11 +25,11 @@ function HomeScreen(props) {
     <ul className="products">
         {products.map(product => <li key={product._id}>
             <div className="product">
-                <Link to={'/product/' + product._id}>
+                <Link to={'/products/' + product._id}>
                     <img className="product-image" src={product.image} alt="product"></img>
                 </Link>
                 <div className="product-name">
-                    <Link to={'/product/' + product._id}>{product.name}</Link>
+                    <Link to={'/products/' + product._id}>{product.name}</Link>
                 </div>
                 <div className="product-brand">
                     {product.brand}

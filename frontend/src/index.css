@@ -184,3 +184,38 @@ a:hover{
 .button:hover{
   border: .1rem #404040 solid;
 }
+
+.cart{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+  align-items: flex-start;
+}
+.cart-list{
+  flex: 3 1 60rem;
+}
+.cart-action{
+  flex: 1 1 20rem;
+  background-color: #f0f0f0;
+  border-radius: .5rem;
+  padding: 1rem;
+}
+.cart-list-container{
+  padding: 0;
+  list-style-type: none;
+  padding: 1rem;
+}
+.cart-list-container  li{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.cart-list-container  li img{
+  max-width:10rem;
+  max-height: 10rem;
+}
+.cart-list-container  li:first-child{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}

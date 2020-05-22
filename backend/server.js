@@ -22,7 +22,8 @@ const products = [{
     brand: 'SW',
     rating: 4.9,
     numReviews: 10,
-    description: 'ihmekakkaa1'
+    description: 'ihmekakkaa1',
+    countInStock: 0
 },
 {
     _id: '2',
@@ -33,7 +34,8 @@ const products = [{
     brand: 'SW',
     rating: 4.9,
     numReviews: 20,
-    description: 'ihmekakkaa2'
+    description: 'ihmekakkaa2',
+    countInStock: 10
 },
 {
     _id: '3',
@@ -44,7 +46,8 @@ const products = [{
     brand: 'SW',
     rating: 4.9,
     numReviews: 30,
-    description: 'ihmekakkaa3'
+    description: 'ihmekakkaa3',
+    countInStock: 15
 },
 
 ]
@@ -54,9 +57,9 @@ app.get("/api/products", (req, res) => {
     //res.send(data.products);
     
 })
-app.get("/api/products:id", (req, res) => {
+app.get("/api/products/:id", (req, res) => {
     const productId = req.params.id
-    const product = data.products.find(x => x._id === productId);
+    const product = products.find(x => x._id === productId);
     if (product) {
         res.send(product)
     } else {
