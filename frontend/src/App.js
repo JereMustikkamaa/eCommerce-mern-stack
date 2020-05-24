@@ -3,18 +3,31 @@ import { BrowserRouter, Route, Link } from 'react-router-dom'
 import './App.css';
 import HomeScreen from './Screens/HomeScreen';
 import ProductScreen from './Screens/ProductScreen';
+import ProductsScreen from './Screens/ProductsScreen';
 import CartScreen from './Screens/CartScreen';
+import SigninScreen from './Screens/SigninScreen';
+import { useSelector, useDispatch } from 'react-redux';
+import RegisterScreen from './Screens/RegisterScreen';
+import { signOut } from './actions/userActions';
 
 
 
 function App() {
+  const userSignin = useSelector(state => state.userSignin)
+  const { userInfo } = userSignin
+  const signout = useSelector(state => state.userSignout)
+  const dispatch = useDispatch()
 
-  
   const openMenu = () => {
     document.querySelector(".sidebar").classList.add("open")
   }
   const closeMenu = () => {
     document.querySelector(".sidebar").classList.remove("open")
+  }
+
+  const handleSignOut = () => {
+    console.log('testi')
+    dispatch(signOut())
   }
 
   return (
@@ -28,8 +41,12 @@ function App() {
             <Link to="/" >BeerBuddy</Link>
           </div>
           <div className="header-links">
-            <a href="cart.html">Cart</a>
-            <a href="signin.html">Signin</a>
+            <Link to="/cart">Cart</Link>
+            {userInfo ? <Link to="/" onClick={() => handleSignOut()}>Sign out</Link> :
+              <Link to="/signin">Signin</Link>}
+            {userInfo ? <Link to="/profile" >{userInfo.name}</Link> :
+              <Link to="/register">Create an account</Link>}
+
           </div>
         </header>
         <aside className="sidebar">
@@ -42,8 +59,11 @@ function App() {
         </aside>
         <main className="main">
           <div className="content">
-            <Route path="/products/:id" component={ProductScreen} />
+            <Route path="/products" component={ProductsScreen} />
+            <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
+            <Route path="/signin" component={SigninScreen} />
+            <Route path="/register" component={RegisterScreen} />
             <Route path="/" exact={true} component={HomeScreen} />
           </div>
         </main>
