@@ -32,66 +32,6 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true , useCre
 app.use("/api/users", userRoute)
 app.use("/api/products", productRoute)
 
-//Hae kaikki tuotteet
-// app.get("/api/products", (req, res, next) => {
-//   Product.find({})
-//     .then(products =>
-//       res.json(products.map(product => product.toJSON()))
-//     ).catch(error => next(error))
-//   //res.send(data.products);
-// })
-
-//Yksittäisen tuotteen hakeminen
-// app.get("/api/product/:id", (req, res, next) => {
-//   Product.findById(req.params.id)
-//     .then(product => {
-//       if (product) {
-//         res.json(product)
-//       } else {
-//         res.status(404).send({ msg: "Product Not Found" })
-//       }
-//     })
-//     .catch(error => next(error))
-// })
-
-//Tuotteen tietojen muuttaminen
-// app.put("/api/product/:id", (req, res) => {
-
-//   Product.findByIdAndUpdate(request.params.id, Product, { new: true })
-//     .then(updatedProduct => {
-//       response.json(updatedProduct.toJSON())
-//     })
-//     .catch(error => next(error))
-
-//   Product.findByIdAndUpdate(productId)
-//     .then(product => {
-//       if (product) {
-//         product.save()
-//           .then(response => {
-//             console.log('Product details updated!')
-//             mongoose.connection.close()
-//           })
-
-//       } else {
-//         res.status(404).send({ msg: "Product Not Found" })
-//       }
-//     })
-//     .catch(error => next(error))
-// })
-
-// const product = new Product({
-//   name: "BeerBuddy Pint",
-//   category: 'v1',
-//   image: '/images/d1.jpg',
-//   price: 100,
-//   brand: 'SW',
-//   rating: 4.99,
-//   numReviews: 50,
-//   description: 'Toimiii',
-//   countInStock: 0
-// })
-
-
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })

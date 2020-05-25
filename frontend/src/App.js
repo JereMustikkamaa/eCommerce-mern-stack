@@ -26,8 +26,8 @@ function App() {
   }
 
   const handleSignOut = () => {
-    console.log('testi')
-    dispatch(signOut())
+    // console.log('testi')
+    // localStorage.clear();
   }
 
   return (

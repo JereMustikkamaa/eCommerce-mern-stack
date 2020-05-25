@@ -11,22 +11,23 @@ const getToken = (user) => {
         isAdmin: user.isAdmin,
     }, JWT_SECRET, {
         expiresIn: '48h'
-    }) 
+    })
 }
 
 const isAuth = (req, res, next) => {
     const token = req.headers.authorization
-    if(token){
+    if (token) {
         const onlyToken = token.slice(7, token.length)
         jwt.verify(onlyToken, config.JWT_SECRET, (err, decode) => {
-            if (error) {
-                return res.status(401).send({msg: 'Incalid token'})
+            if (err) {
+                // return res.status(401).send({ msg: 'Invalid token' })
             }
-            req.user = token;
+            req.user = decode;
             next()
             return
         })
-        return res.status(401).send({ msg: 'Token is not supplied'})
+    } else {
+        return res.status(401).send({ msg: 'Token is not supplied' })
     }
 }
 
@@ -34,7 +35,7 @@ const isAdmin = (req, res, next) => {
     if (req.user && req.user.isAdmin) {
         return next()
     }
-    return res.status(401).send({msg: 'Admin token is not valid'})
+    // return res.status(401).send({ msg: 'Admin token is not valid' })
 }
 
 module.exports = getToken
