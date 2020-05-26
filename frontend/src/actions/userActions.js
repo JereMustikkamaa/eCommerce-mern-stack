@@ -13,6 +13,7 @@ export const signIn = (email, password) => async (dispatch)=> {
 }
 
 export const signOut = () => {
+    Cookie.remove('userInfo')
     return {
         type: 'USER_SIGNOUT'
     }  

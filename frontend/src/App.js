@@ -15,7 +15,6 @@ import { signOut } from './actions/userActions';
 function App() {
   const userSignin = useSelector(state => state.userSignin)
   const { userInfo } = userSignin
-  const signout = useSelector(state => state.userSignout)
   const dispatch = useDispatch()
 
   const openMenu = () => {
@@ -26,8 +25,7 @@ function App() {
   }
 
   const handleSignOut = () => {
-    // console.log('testi')
-    // localStorage.clear();
+    dispatch(signOut())
   }
 
   return (
