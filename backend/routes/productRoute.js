@@ -1,9 +1,8 @@
 const express = require('express')
 const Product = require('../models/productModel')
-const isAuth = require('../util')
-const isAdmin = require('../util')
-
+const utils = require('../util')
 const router = express.Router()
+const middleware = require('../middleware')
 
 router.get("/", (req, res, next) => {
     Product.find({})
@@ -21,11 +20,10 @@ router.get("/:id", (req, res, next) => {
                 res.status(404).send({ msg: "Product Not Found" })
             }
         })
-        // .catch(error => next(error))
+        .catch(error => next(error))
 })
 
-//isAuth ei toimi jostain syystä
-router.post("/", (req, res, next) => {
+router.post("/", utils.isAuth, (req, res, next) => {
     const newProduct = new Product({
         name: req.body.name,
         price: req.body.price,
@@ -46,7 +44,7 @@ router.post("/", (req, res, next) => {
         .catch(error => next(error))
 })
 
-router.put("/:id", isAuth, isAdmin, (req, res, next) => {
+router.put("/:id", utils.isAuth, (req, res, next) => {
     const productId = req.params.id
     Product.findOne({_id: productId})
     .then(product => {
@@ -70,8 +68,8 @@ router.put("/:id", isAuth, isAdmin, (req, res, next) => {
     }).catch(error=> next(error))
 
 })
-//, isAuth, isAdmin
-router.delete("/:id", (req, res, next) => {
+
+router.delete("/:id", utils.isAuth, (req, res, next) => {
     const productId = req.params.id
     Product.findById({_id: productId})
     .then(product => {
@@ -87,24 +85,8 @@ router.delete("/:id", (req, res, next) => {
     }).catch(error=> next(error))
 
 })
-const unknownEndpoint = (request, response) => {
-    response.status(404).send({ error: 'unknown endpoint' })
-}
 
-router.use(unknownEndpoint)
-
-const errorHandler = (error, request, response, next) => {
-    console.error(error.message)
-
-    if (error.name === 'CastError' && error.kind === 'ObjectId') {
-        return response.status(400).send({ error: 'malformatted id' })
-    } else if (error.name === 'ValidationError') {
-        return response.status(400).json({ error: error.message })
-    }
-
-    next(error)
-}
-
-router.use(errorHandler)
+router.use(middleware.unknownEndpoint)
+router.use(middleware.errorHandler)
 
 module.exports = router

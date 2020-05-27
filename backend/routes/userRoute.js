@@ -1,7 +1,8 @@
 const express = require('express')
 const User = require('../models/userModel')
-const getToken = require('../util')
+const utils = require('../util')
 const router = express.Router()
+const middleware = require('../middleware')
 
 router.post('/signin', (req, res, next ) => {
     User.findOne({
@@ -15,7 +16,7 @@ router.post('/signin', (req, res, next ) => {
                     name: signinUser.name,
                     email: signinUser.email,
                     isAdmin: signinUser.isAdmin,
-                    token: getToken(signinUser)
+                    token: utils.getToken(signinUser)
                 })
             }
         })
@@ -37,7 +38,7 @@ router.post('/register', (req, res, next) => {
                     name: newUser.name,
                     email: newUser.email,
                     isAdmin: newUser.isAdmin,
-                    token: getToken(newUser)
+                    token: utils.getToken(newUser)
                 })
             }
         })
@@ -61,21 +62,7 @@ router.get("/createadmin", (req, res, next) => {
 
 })
 
-const unknownEndpoint = (request, response) => {
-    response.status(404).send({ error: 'unknown endpoint' })
-}
-
-router.use(unknownEndpoint)
-
-const errorHandler = (error, request, response, next) => {
-    console.error(error.message)
-    if (error.name === 'CastError' && error.kind === 'ObjectId') {
-        return response.status(400).send({ error: 'malformatted id' })
-    } else if (error.name === 'ValidationError') {
-        return response.status(400).json({ error: error.message })
-    }
-    next(error)
-}
-router.use(errorHandler)
+router.use(middleware.unknownEndpoint)
+router.use(middleware.errorHandler)
 
 module.exports = router

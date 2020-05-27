@@ -42,7 +42,7 @@ function App() {
             <Link to="/cart">Cart</Link>
             {userInfo ? <Link to="/" onClick={() => handleSignOut()}>Sign out</Link> :
               <Link to="/signin">Signin</Link>}
-            {userInfo ? <Link to="/profile" >{userInfo.name}</Link> :
+            {userInfo ? <Link to="/products" >{userInfo.name}</Link> :
               <Link to="/register">Create an account</Link>}
 
           </div>
