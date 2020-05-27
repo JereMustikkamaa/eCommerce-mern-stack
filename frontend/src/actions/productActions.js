@@ -7,7 +7,7 @@ export const listProducts = () => async (dispatch) => {
         const { data } = await Axios.get("/api/products")
         dispatch({ type: 'PRODUCT_LIST_SUCCESS', payload: data })
     } catch (e) {
-        dispatch({ type: 'PRODUCT_LIST_FAIL', payload: e.message })
+        dispatch({ type: 'PRODUCT_LIST_FAIL', payload: e.response })
     }
 }
 
@@ -31,7 +31,7 @@ export const saveProduct = (product) => async (dispatch, getState) => {
             dispatch({ type: 'PRODUCT_SAVE_SUCCESS', payload: data })
         }
     } catch (e) {
-        dispatch({ type: 'PRODUCT_SAVE_FAIL', payload: e.message })
+        dispatch({ type: 'PRODUCT_SAVE_FAIL', payload: e.response })
     }
 }
 
@@ -40,8 +40,8 @@ export const getProductDetails = (productId) => async (dispatch) => {
         dispatch({ type: 'PRODUCT_DETAILS_REQUEST', payload: productId })
         const { data } = await Axios.get("/api/products/" + productId)
         dispatch({ type: 'PRODUCT_DETAILS_SUCCESS', payload: data })
-    } catch (e) {
-        dispatch({ type: 'PRODUCT_DETAILS_FAIL', payload: e.message })
+    } catch (e) {        
+        dispatch({ type: 'PRODUCT_DETAILS_FAIL', payload: e.response })
     }
 }
 
@@ -56,6 +56,6 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
         })
         dispatch({ type: 'PRODUCT_DELETE_SUCCESS', payload: data , success: true})
     } catch (e) {
-        dispatch({ type: 'PRODUCT_DELETE_FAIL', payload: e.message })
+        dispatch({ type: 'PRODUCT_DELETE_FAIL', payload: e.response })
     }
 }

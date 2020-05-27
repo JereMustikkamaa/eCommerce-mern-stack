@@ -56,7 +56,7 @@ function ProductsScreen(props) {
 
     return <>
         {loading ? <div>Loading...</div> :
-            error ? <div>{error}</div> : (
+            error ? <div>{error.status} {error.data.error}</div> : (
                 <div className="content content-margined">
                     <div className="product-header">
                         <h3>Products</h3>
@@ -71,7 +71,7 @@ function ProductsScreen(props) {
                                     </li>
                                     <li>
                                         {loadingSave && <div>Loading</div>}
-                                        {errorSave && <div>{errorSave}</div>}
+                                        {errorSave && <div>{errorSave.status} {errorSave.data.error}</div>}
                                     </li>
 
 

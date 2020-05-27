@@ -8,7 +8,7 @@ export const signIn = (email, password) => async (dispatch)=> {
         dispatch({type: 'USER_SIGNIN_SUCCESS', payload: data})
         Cookie.set('userInfo', JSON.stringify(data))
     } catch (e) {
-        dispatch({type: 'USER_SIGNIN_FAIL', payload: e.message})
+        dispatch({type: 'USER_SIGNIN_FAIL', payload: e.response})
     }   
 }
 
@@ -26,6 +26,6 @@ export const register = (name, email, password) => async (dispatch)=> {
         dispatch({type: 'USER_REGISTER_SUCCESS', payload: data})
         Cookie.set('userInfo', JSON.stringify(data))
     } catch (e) {
-        dispatch({type: 'USER_REGISTER_FAIL', payload: e.message})
+        dispatch({type: 'USER_REGISTER_FAIL', payload: e.response})
     }   
 }

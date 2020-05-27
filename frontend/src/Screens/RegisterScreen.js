@@ -36,7 +36,7 @@ function RegisterScreen(props) {
                 </li>
                 <li>
                     {loading && <div>Loading</div>}
-                    {error && <div>{error}</div>}
+                    {error && <div>{error.status} {error.data.error}</div>}
                 </li>
                 <li>
                     <label htmlFor="name">

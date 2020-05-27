@@ -4,12 +4,13 @@ const utils = require('../util')
 const router = express.Router()
 const middleware = require('../middleware')
 
-router.post('/signin', (req, res, next ) => {
+router.post('/signin', (req, res, next) => {
     User.findOne({
-        email: req.body.email,
-        password: req.body.password
-    })
+            email: req.body.email,
+            password: req.body.password
+        })
         .then(signinUser => {
+            console.log('response');
             if (signinUser) {
                 res.send({
                     _id: signinUser.id,
@@ -18,9 +19,15 @@ router.post('/signin', (req, res, next ) => {
                     isAdmin: signinUser.isAdmin,
                     token: utils.getToken(signinUser)
                 })
+            } else {
+                res.status(401).send({ error: 'Wrong username or password' })
             }
         })
-        .catch(error => next(error))
+        .catch(error => {
+            console.log('kukkuu');
+
+            next(error)
+        })
 })
 
 router.post('/register', (req, res, next) => {

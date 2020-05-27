@@ -23,7 +23,7 @@ function ProductScreen(props) {
             <Link to="/" >Back to results</Link>
         </div>
         {loading ? <div>Loading...</div> :
-            error ? <div>{error}</div> :
+            error ? <div>{error.status} {error.data.error}</div> :
                 (<div className="details">
                     <div className="details-image">
                         <img src={product.image} alt="product" />

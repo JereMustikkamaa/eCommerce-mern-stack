@@ -13,7 +13,7 @@ function HomeScreen(props) {
     }, [])
 
     return loading? <div>Loading...</div>:
-    error? <div>{error}</div>:
+    error? <div>{error.status} {error.data.error}</div>:
     <ul className="products">
         {products.map(product => <li key={product._id}>
             <div className="product">
