@@ -293,3 +293,27 @@ th{
 tbody>tr:nth-child(odd){
   background-color: #f0f0f0;
 }
+/* Profile screen */
+.profile-head{
+  justify-items: center;
+  grid-area: profile-header;
+  /* background-color: #f0c040; */
+}
+.profile-main{
+  grid-area: profile-main;
+  /* background-color: #ff8800; */
+
+}
+.profile-content{
+  grid-area: profile-content;
+  background-color: #404040;
+}
+.grid-profile{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 10% 90%;
+  grid-template-areas: 
+  "profile-header profile-header"
+  "profile-main profile-content";
+  height: 80vh;
+}

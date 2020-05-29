@@ -6,6 +6,7 @@ import ProductScreen from './Screens/ProductScreen';
 import ProductsScreen from './Screens/ProductsScreen';
 import CartScreen from './Screens/CartScreen';
 import SigninScreen from './Screens/SigninScreen';
+import ProfileScreen from './Screens/ProfileScreen';
 import { useSelector, useDispatch } from 'react-redux';
 import RegisterScreen from './Screens/RegisterScreen';
 import { signOut } from './actions/userActions';
@@ -42,7 +43,7 @@ function App() {
             <Link to="/cart">Cart</Link>
             {userInfo ? <Link to="/" onClick={() => handleSignOut()}>Sign out</Link> :
               <Link to="/signin">Signin</Link>}
-            {userInfo ? <Link to="/products" >{userInfo.name}</Link> :
+            {userInfo ? <Link to="/profile" >{userInfo.name}</Link> :
               <Link to="/register">Create an account</Link>}
 
           </div>
@@ -61,6 +62,7 @@ function App() {
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/signin" component={SigninScreen} />
+            <Route path="/profile" component={ProfileScreen} />
             <Route path="/register" component={RegisterScreen} />
             <Route path="/" exact={true} component={HomeScreen} />
           </div>
